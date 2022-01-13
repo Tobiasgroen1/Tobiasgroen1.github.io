@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Covid-19</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1.3em;
+            color: black;
+            height: 100vh;
+            background-color: white;
+        }
+
+        h1 {
+            margin: 0 auto;
+            font-size: 2.2em;
+            color: black;
+            font-size: 5em;
+        }
+
+        div {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>
+            Covid-19 numbers in the
+            <div id="land"></div>
+        </h1>
+    </div>
+    <div>
+        Datum:
+        <div id="datum"></div>
+    </div>
+    <div>
+        New Confirmed:
+        <div id="new_confirmed"></div>
+
+    </div>
+    <div>
+
+        New Deaths:
+        <div id="new_deaths"></div>
+    </div>
+    <div>
+        Total Confirmed:
+        <div id="total_confirmed"></div>
+    </div>
+    <div>
+        Total Deaths:
+        <div id="total_deaths"></div>
+    </div>
+
+    <script lang="text/javascript">
+        fetch('https://api.covid19api.com/summary')
+            .then(function (resp) { return resp.json() }) // Convert data to json
+            .then(function (data) {
+                console.log(data);
+                console.log(data.Countries[122].Country);
+                console.log(data.Countries[122].TotalDeaths);
+                console.log(data.Countries[122].NewDeaths);
+                console.log(data.Countries[122].NewConfirmed);
+                console.log(data.Countries[122].TotalConfirmed);
+
+                document.getElementById("land").innerHTML = (data.Countries[122].Country);
+                document.getElementById("datum").innerHTML = (data.Countries[122].Date);
+                document.getElementById("new_deaths").innerHTML = (data.Countries[122].NewDeaths);
+                document.getElementById("total_deaths").innerHTML = (data.Countries[122].TotalDeaths);
+                document.getElementById("new_confirmed").innerHTML = (data.Countries[122].NewConfirmed);
+                document.getElementById("total_confirmed").innerHTML = (data.Countries[122].TotalConfirmed);
+            })
+            .catch(function () { // catch any errors
+            });
+    </script>
+</body>
+
+</html>
